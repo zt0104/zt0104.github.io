@@ -214,62 +214,122 @@
             
 
   
-    <article id="post-在项目中操作MySQL" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-haha" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/11/16/haha/" target="_blank">haha</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/11/16/haha/" class="archive-article-date">
+        <time datetime="2021-11-16T06:34:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-16</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="在项目中-操作-MySQL"><a href="#在项目中-操作-MySQL" class="headerlink" title="在项目中 操作 MySQL"></a>在项目中 操作 MySQL</h1><ol>
-<li><p> 安装 MYSQL 数据库 第三方模块（mysql）</p>
-</li>
-<li><p>通过mysql模块 连接到 MySQL数据库</p>
-</li>
-<li><p>通过my sql 模块 执行SQL 语句</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm init -y</span><br><span class="line">npm i mysql</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h1 id="配置mysql-模块"><a href="#配置mysql-模块" class="headerlink" title="配置mysql 模块"></a>配置mysql 模块</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入数据库	</span></span><br><span class="line"><span class="keyword">const</span> mysql = requier(<span class="string">&#x27;mysql&#x27;</span>)</span><br><span class="line">   <span class="comment">// 建立 与 MYSQL 数据库连接</span></span><br><span class="line">   <span class="keyword">const</span> db =mysql.createPool(&#123;</span><br><span class="line">       <span class="attr">host</span>:<span class="string">&#x27;127.0.0.1&#x27;</span>,  <span class="comment">//数据库ip地址</span></span><br><span class="line">       <span class="attr">user</span>:<span class="string">&#x27;root&#x27;</span>,		<span class="comment">//登录数据库账号</span></span><br><span class="line">       <span class="attr">password</span>:<span class="string">&#x27;admin123&#x27;</span>,	<span class="comment">//登录数据库密码</span></span><br><span class="line">       <span class="attr">database</span>:<span class="string">&#x27;my_db_01&#x27;</span>		<span class="comment">//指定摇操作的哪个数据库</span></span><br><span class="line">   &#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h1 id="测试mysql-是否-正常工作"><a href="#测试mysql-是否-正常工作" class="headerlink" title="测试mysql 是否 正常工作"></a>测试mysql 是否 正常工作</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 厕所 mysql 是否 正常工作</span></span><br><span class="line">db.query(<span class="string">&#x27;select 1&#x27;</span>,<span class="function">(<span class="params">err,result</span>)=&gt;</span>&#123;     <span class="comment">//select 1 没有意义   仅测试用</span></span><br><span class="line">  <span class="keyword">if</span>(err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  <span class="built_in">console</span>.log(result);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="操作数据库"><a href="#操作数据库" class="headerlink" title="操作数据库"></a>操作数据库</h1><h2 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h2><p><img src="%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%93%8D%E4%BD%9CMySQL.assets/image-20210707094614787.png" alt="image-20210707094614787"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 插入数据</span></span><br><span class="line"><span class="keyword">const</span> user=&#123;<span class="attr">username</span>:<span class="string">&#x27;zt2&#x27;</span>,<span class="attr">usermessage</span>:<span class="string">&#x27;zt123456&#x27;</span>&#125;</span><br><span class="line"><span class="keyword">const</span> queryStr =<span class="string">&quot;insert into users (username,password) values(?,?)&quot;</span></span><br><span class="line">db.query(queryStr,[user.username,user.usermessage],<span class="function">(<span class="params">err,result</span>)=&gt;</span>&#123;    </span><br><span class="line">  <span class="keyword">if</span>(err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  <span class="comment">// console.log(result);</span></span><br><span class="line">  <span class="keyword">if</span>(result.affectedRows ==<span class="number">1</span>) <span class="built_in">console</span>.log(<span class="string">&#x27;插入数据成功&#x27;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h2 id="插入数据的便捷方式"><a href="#插入数据的便捷方式" class="headerlink" title="插入数据的便捷方式"></a>插入数据的便捷方式</h2><p>​        如果 <strong>数据对象的属性</strong>  和    <strong>数据表</strong> 字段 一 一 对应</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user=&#123;<span class="attr">username</span>:<span class="string">&#x27;zt2&#x27;</span>,<span class="attr">password</span>:<span class="string">&#x27;zt123456&#x27;</span>&#125;</span><br><span class="line">   <span class="keyword">const</span> queryStr =<span class="string">&quot;insert into users set ?&quot;</span></span><br><span class="line">   db.query(queryStr,user,<span class="function">(<span class="params">err,result</span>)=&gt;</span>&#123;    </span><br><span class="line">     <span class="keyword">if</span>(err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">     <span class="comment">// console.log(result);</span></span><br><span class="line">     <span class="keyword">if</span>(result.affectedRows ==<span class="number">1</span>) <span class="built_in">console</span>.log(<span class="string">&#x27;插入数据成功&#x27;</span>);</span><br><span class="line">   &#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">const</span> user=&#123; <span class="attr">id</span>:<span class="number">12</span>, <span class="attr">username</span>:<span class="string">&#x27;xdf&#x27;</span>,<span class="attr">password</span>:<span class="string">&#x27;zdnb&#x27;</span>&#125;</span><br><span class="line"><span class="keyword">const</span> sqlStr =<span class="string">&quot;update users set username=?, password=? where id=? &quot;</span></span><br><span class="line">db.query(sqlStr,[user.username,user.password,user.id],<span class="function">(<span class="params">err,result</span>)=&gt;</span>&#123;    </span><br><span class="line">  <span class="keyword">if</span>(err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  <span class="comment">// console.log(result);</span></span><br><span class="line">  <span class="keyword">if</span>(result.affectedRows ==<span class="number">1</span>) <span class="built_in">console</span>.log(<span class="string">&#x27;更新数据成功&#x27;</span>);</span><br><span class="line">&#125;) </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>注意事项</strong></p>
+    <p><strong>不同开发模式下的身份认证</strong></p>
 <ol>
-<li><strong>update</strong>  单词</li>
-<li>如果 数据表中 没有<strong>可更新的 项</strong>   则<strong>不会</strong>继续运行</li>
-<li>执行了 update 语句之后  结果 也是一个 <strong>对象</strong> 可通过  affectRows 判断是否更新成功</li>
+<li><strong>服务端渲染</strong>推荐使用 <strong>Session</strong> 认证机制</li>
+<li><strong>前后端分离</strong>推荐使用 <strong>JWT</strong> 认证机制</li>
 </ol>
-<h2 id="更新数据便捷方式"><a href="#更新数据便捷方式" class="headerlink" title="更新数据便捷方式"></a>更新数据便捷方式</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user=&#123; <span class="attr">id</span>:<span class="number">11</span>, <span class="attr">username</span>:<span class="string">&#x27;lhh&#x27;</span>,<span class="attr">password</span>:<span class="string">&#x27;zdcb&#x27;</span>&#125;</span><br><span class="line"><span class="keyword">const</span> sqlStr =<span class="string">&quot;update users set ? where id=?&quot;</span></span><br><span class="line">db.query(sqlStr,[user,user.id],<span class="function">(<span class="params">err,result</span>)=&gt;</span>&#123;    </span><br><span class="line">  <span class="keyword">if</span>(err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  <span class="comment">// console.log(result);</span></span><br><span class="line">  <span class="keyword">if</span>(result.affectedRows ==<span class="number">1</span>) <span class="built_in">console</span>.log(<span class="string">&#x27;更新数据成功&#x27;</span>);</span><br><span class="line">&#125;) </span><br></pre></td></tr></table></figure>
-
-<p>注意事项 </p>
+<h1 id="cokkie-认识"><a href="#cokkie-认识" class="headerlink" title="cokkie 认识"></a>cokkie 认识</h1><p><img src="%E5%89%8D%E5%90%8E%E7%AB%AF%E7%9A%84%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81.assets/image-20210707204327979.png"></p>
+<p><strong>解析：超市收银员 给你 颁发 会员卡 之后 出示 会员卡 的过程 类似 cookie</strong></p>
+<p>  <strong>在首次 登录成功后  服务端 颁发 cookie</strong></p>
+<p><img src="%E5%89%8D%E5%90%8E%E7%AB%AF%E7%9A%84%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81.assets/image-20210707205139133.png" alt="image-20210707205139133"></p>
 <ol>
-<li> set?  where id =&gt;[user,user.id]  </li>
+<li><strong>cookie</strong> 是<strong>存储</strong>在 <strong>用户 浏览器</strong>中的 <strong>字符串</strong></li>
+<li><strong>域名独立</strong></li>
+<li><strong>过期时限</strong></li>
+<li><strong>4kb限制</strong></li>
 </ol>
-<h2 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h2><p>在删除数据是，推荐根据 id 唯一标识 来删除对应的数据</p>
-<p>  DELETE FORM 数据表 WHERE  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sqlStr =<span class="string">&quot;delete from users where id=?&quot;</span></span><br><span class="line">db.query(sqlStr,<span class="number">7</span>,<span class="function">(<span class="params">err,result</span>)=&gt;</span>&#123;    </span><br><span class="line">  <span class="keyword">if</span>(err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  <span class="comment">// console.log(result);</span></span><br><span class="line">  <span class="keyword">if</span>(result.affectedRows ==<span class="number">1</span>) <span class="built_in">console</span>.log(<span class="string">&#x27;删除数据成功&#x27;</span>);</span><br><span class="line">&#125;) </span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>​        调用 db.query() 执行 SQL语句 为占位符指定具体的值</p>
+<h2 id="Cookie在身份认证中的作用"><a href="#Cookie在身份认证中的作用" class="headerlink" title="Cookie在身份认证中的作用"></a>Cookie在身份认证中的作用</h2><p><img src="%E5%89%8D%E5%90%8E%E7%AB%AF%E7%9A%84%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81.assets/image-20210707205832078.png" alt="image-20210707205832078"></p>
+<p>描述：</p>
 <ol>
-<li>sql语句中有多个 占位符  ，则<strong>必须使用数组</strong>为每个占位符指定具体的值</li>
-<li>如果 sql 只有一个占位符 则可以<strong>省略数组</strong></li>
+<li>当客户端<strong>第一次请求服务器</strong> ， 服务器通过<strong>响应头</strong>（Response Headers） 向客户端发送Cookie ,<strong>客户端会将Cookie保存在浏览器中</strong></li>
+<li>当客户端 <strong>每一次请求 浏览器</strong> ， 浏览器<strong>自动携带cookie</strong> ，通过<strong>请求头</strong>（Request Headers）发送给服务器 ，验证身份</li>
 </ol>
+<h1 id="提高-身份认证的安全性"><a href="#提高-身份认证的安全性" class="headerlink" title="提高 身份认证的安全性"></a>提高 身份认证的安全性</h1><p><img src="%E5%89%8D%E5%90%8E%E7%AB%AF%E7%9A%84%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81.assets/image-20210707211721875.png" alt="image-20210707211721875"></p>
+<h1 id="Session认证机制-和工作原理"><a href="#Session认证机制-和工作原理" class="headerlink" title="Session认证机制  和工作原理"></a>Session认证机制  和工作原理</h1><p><img src="%E5%89%8D%E5%90%8E%E7%AB%AF%E7%9A%84%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81.assets/image-20210707212306357.png" alt="image-20210707212306357"></p>
+<h1 id="在Express中-使用-Session认证"><a href="#在Express中-使用-Session认证" class="headerlink" title="在Express中 使用 Session认证"></a>在Express中 使用 Session认证</h1><h3 id="安装-express-session-中间件"><a href="#安装-express-session-中间件" class="headerlink" title="安装 express-session 中间件"></a><strong>安装 express-session 中间件</strong></h3><h3 id="配置-express-session-通过-app-use"><a href="#配置-express-session-通过-app-use" class="headerlink" title="配置 express-session   通过 app.use()"></a>配置 express-session   通过 app.use()</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> session= <span class="built_in">require</span>(<span class="string">&#x27;express-session&#x27;</span>)</span><br><span class="line">app.use(session(&#123;</span><br><span class="line">  <span class="attr">secret</span>:<span class="string">&#x27;ztlovety&#x27;</span>, <span class="comment">// secret 属性可以为任意字符串</span></span><br><span class="line">  <span class="attr">resave</span>:<span class="literal">false</span>,</span><br><span class="line">  <span class="attr">saveUninitialized</span>:<span class="literal">true</span>   <span class="comment">//保存未初始化   </span></span><br><span class="line">&#125;))</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="向sessoin-中存-数据"><a href="#向sessoin-中存-数据" class="headerlink" title="向sessoin 中存 数据"></a>向sessoin 中<strong>存 数据</strong></h3><p>当express-session 中间件配置成功后 通过 req.session 来访问 使用session 存储用户信息</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">app.post(<span class="string">&#x27;/api/login&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 判断用户提交的登录信息是否正确</span></span><br><span class="line">  <span class="keyword">if</span> (req.body.username !== <span class="string">&#x27;admin&#x27;</span> || req.body.password !== <span class="string">&#x27;000000&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> res.send(&#123; <span class="attr">status</span>: <span class="number">1</span>, <span class="attr">msg</span>: <span class="string">&#x27;登录失败&#x27;</span> &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// TODO_02：请将登录成功后的用户信息，保存到 Session 中</span></span><br><span class="line">   req.session.user=req.body  <span class="comment">//讲用户信息。存储到Session中</span></span><br><span class="line">   req.session.islogin =  <span class="literal">true</span>  <span class="comment">//讲用户登录状态 存储到 Session中</span></span><br><span class="line"></span><br><span class="line">  res.send(&#123; <span class="attr">status</span>: <span class="number">0</span>, <span class="attr">msg</span>: <span class="string">&#x27;登录成功&#x27;</span> &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="从session-中取数据"><a href="#从session-中取数据" class="headerlink" title="从session 中取数据"></a>从session 中取数据</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">&#x27;/api/username&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// TODO_03：请从 Session 中获取用户的名称，响应给客户端</span></span><br><span class="line">  <span class="keyword">if</span>(!req.session.islogin) &#123;</span><br><span class="line">    <span class="keyword">return</span> res.send(&#123;<span class="attr">status</span>:<span class="number">1</span>,<span class="attr">msg</span>:<span class="string">&#x27;fail&#x27;</span>&#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  res.send(&#123;</span><br><span class="line">    <span class="attr">status</span>:<span class="number">0</span>,</span><br><span class="line">    <span class="attr">msg</span>:<span class="string">&#x27;success&#x27;</span>,</span><br><span class="line">    <span class="attr">username</span>:req.session.user.username</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="清空session"><a href="#清空session" class="headerlink" title="清空session"></a>清空session</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">app.post(<span class="string">&#x27;/api/logout&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// TODO_04：清空 Session 信息</span></span><br><span class="line">  req.session.destroy()</span><br><span class="line">  res.send(&#123;</span><br><span class="line">    <span class="attr">status</span>:<span class="number">0</span>,</span><br><span class="line">    <span class="attr">msg</span>:<span class="string">&#x27;退出登录成功&#x27;</span></span><br><span class="line">  &#125;)<span class="comment">// de</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="JWT-认证机制"><a href="#JWT-认证机制" class="headerlink" title="JWT 认证机制"></a>JWT 认证机制</h1><ol>
+<li> 了解 Session 认证的<strong>局限性</strong></li>
+</ol>
+<p>   <img src="%E5%89%8D%E5%90%8E%E7%AB%AF%E7%9A%84%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81.assets/image-20210708100235671.png" alt="image-20210708100235671"></p>
+<p><img src="%E5%89%8D%E5%90%8E%E7%AB%AF%E7%9A%84%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81.assets/image-20210708100405677.png" alt="image-20210708100405677"></p>
+<p>总结：</p>
+<p><strong>不跨域 用 session 认证</strong></p>
+<p><strong>跨域 用 JWT 认证</strong></p>
+<h2 id="JWT工作原理"><a href="#JWT工作原理" class="headerlink" title="JWT工作原理"></a>JWT工作原理</h2><p><img src="%E5%89%8D%E5%90%8E%E7%AB%AF%E7%9A%84%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81.assets/image-20210708101334823.png" alt="image-20210708101334823"></p>
+<p><strong>session ：数据 存储在 服务器端</strong></p>
+<p><strong>token ： 数据存储在  客户端</strong>     </p>
+<h2 id="JWT-组成-部分"><a href="#JWT-组成-部分" class="headerlink" title="JWT 组成 部分"></a>JWT 组成 部分</h2><p><img src="%E5%89%8D%E5%90%8E%E7%AB%AF%E7%9A%84%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81.assets/image-20210708101832702.png" alt="image-20210708101832702"></p>
+<p><strong>JWT 分别由 Header , Payload,Signature  组成  之间用 ‘  . ’</strong> </p>
+<p>​    <img src="%E5%89%8D%E5%90%8E%E7%AB%AF%E7%9A%84%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81.assets/image-20210708101906951.png" alt="image-20210708101906951"></p>
+<p><strong>用户信息 将 加密 存储在 Payload 部分</strong></p>
+<h2 id="JWT-的使用方式"><a href="#JWT-的使用方式" class="headerlink" title="JWT 的使用方式"></a>JWT 的使用方式</h2><p><img src="%E5%89%8D%E5%90%8E%E7%AB%AF%E7%9A%84%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81.assets/image-20210708102030967.png" alt="image-20210708102030967"></p>
+<p> <strong>客户端收到 服务器 返回的JWT 之后  ，本地存储后</strong></p>
+<p><strong>每次，发起请求时，都会携带 JWT 字符串   推荐讲 JWT 放在HTTP 请求头中的 Authorization（授权)中</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Authorization:Bearer &lt;token&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="使用JWT"><a href="#使用JWT" class="headerlink" title="使用JWT"></a>使用JWT</h1><h2 id="安装JWT-相关的包"><a href="#安装JWT-相关的包" class="headerlink" title="安装JWT 相关的包"></a>安装JWT 相关的包</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install jsonwebtoken express-jwt</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>jsonwebtoken 用于 生成JWT 字符串</li>
+<li>express-jwt 用于将 JWT字符串 解析 还原成 JSON 对象     //将客户端 发送的JWT 在后台服务器解析 JSON</li>
+</ul>
+<h2 id="导入-JWT-相关的包"><a href="#导入-JWT-相关的包" class="headerlink" title="导入 JWT 相关的包"></a>导入 JWT 相关的包</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> jwt =<span class="built_in">require</span>(<span class="string">&#x27;jsonwebtoken&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> expressJWT = <span class="built_in">require</span>(<span class="string">&#x27;express-jwt&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="定义secret-密钥"><a href="#定义secret-密钥" class="headerlink" title="定义secret 密钥"></a>定义secret 密钥</h2><p><img src="%E5%89%8D%E5%90%8E%E7%AB%AF%E7%9A%84%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81.assets/image-20210708162005148.png" alt="image-20210708162005148"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> secretKey = <span class="string">&#x27;ztyyds no1&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>secret 密钥 本质 就是 一个字符串</strong></p>
+<h2 id="在登录成功后生成-JWT字符串"><a href="#在登录成功后生成-JWT字符串" class="headerlink" title="在登录成功后生成 JWT字符串"></a>在登录成功后生成 JWT字符串</h2><p>调用 <strong>jsonwebtoekn</strong> 包 <strong>提供的</strong> ， 讲用户的信息 <strong>加密</strong> 成 JWT 字符串 响应给客户端</p>
+<p>// 调用  jwt.sign() 生成 JWT 字符串 三个参数 分别是 <strong>用户信息对象，加密密钥，配置对象</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">token: jwt.sign(&#123;<span class="attr">username</span>:userinfo.username&#125;, secretKey, &#123;<span class="attr">expiresIn</span>:<span class="string">&#x27;30s&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="JWT-字符串-还原为JSON-对象"><a href="#JWT-字符串-还原为JSON-对象" class="headerlink" title="JWT 字符串 还原为JSON 对象"></a>JWT 字符串 还原为JSON 对象</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(expressJWT(&#123;<span class="attr">secret</span>:secretKey&#125;).unless(&#123;<span class="attr">path</span>:[<span class="regexp">/^\/api\//</span>]&#125;))</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="使用-req-user-获取用户信息"><a href="#使用-req-user-获取用户信息" class="headerlink" title="使用 req.user 获取用户信息"></a>使用 req.user 获取用户信息</h2><p>​    当 <strong>express.jwt</strong> 这个中间件配置 成功后   在有权限的接口中 使用<strong>req.user</strong> 对象 来访问JWT字符串中解析出来的用户信息</p>
+<h2 id="jwt-捕获解析-jwt-失败产生的错误"><a href="#jwt-捕获解析-jwt-失败产生的错误" class="headerlink" title="jwt-捕获解析 jwt 失败产生的错误`"></a>jwt-捕获解析 jwt 失败产生的错误`</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">app.use(<span class="function">(<span class="params">err,req,res,next</span>) =&gt;</span>&#123;</span><br><span class="line"> <span class="keyword">if</span>(err.name === <span class="string">&#x27;UnauthorizedError&#x27;</span>)&#123;</span><br><span class="line">   <span class="keyword">return</span> res.send(&#123;</span><br><span class="line">     <span class="attr">status</span>:<span class="number">401</span>,</span><br><span class="line">     <span class="attr">message</span>:<span class="string">&#x27;无效的token&#x27;</span></span><br><span class="line">   &#125;)</span><br><span class="line"> &#125;</span><br><span class="line"> res.send(&#123;</span><br><span class="line">   <span class="attr">status</span>:<span class="number">401</span>,</span><br><span class="line">   <span class="attr">message</span>:<span class="string">&#x27;未知的错误&#x27;</span></span><br><span class="line"> &#125;)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
 
     
 
@@ -285,7 +345,81 @@
 
     
     <p class="article-more-link">
-      <a class="article-more-a" href="/2021/11/16/%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%93%8D%E4%BD%9CMySQL/">展开全文 >></a>
+      <a class="article-more-a" href="/2021/11/16/haha/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-xixi" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/11/16/xixi/" target="_blank">xixi</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/11/16/xixi/" class="archive-article-date">
+        <time datetime="2021-11-16T03:37:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-16</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/11/16/xixi/">展开全文 >></a>
     </p>
     
 
@@ -502,269 +636,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2021/11/16/MySql%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-express的基本使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="express的基本使用"><a href="#express的基本使用" class="headerlink" title="express的基本使用"></a>express的基本使用</h1><h2 id="一、获取URL中携带的查询参数"><a href="#一、获取URL中携带的查询参数" class="headerlink" title="一、获取URL中携带的查询参数"></a>一、获取URL中携带的查询参数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">app.get(<span class="string">&#x27;/&#x27;</span>,<span class="function">(<span class="params">req,res</span>) =&gt;</span>&#123;</span><br><span class="line">      <span class="comment">// req.query 默认是个空对象</span></span><br><span class="line">      <span class="comment">//客户端判断 ？name=zs&amp;age=20 这种查询字符串，发送到服务器的参数</span></span><br><span class="line">      <span class="comment">// 可以通过 req.query 对象访问到</span></span><br><span class="line">      <span class="comment">// eg : req.query.name  req.query.age</span></span><br><span class="line">      </span><br><span class="line"><span class="built_in">console</span>.log(req.query)</span><br><span class="line">  </span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="二、获取URL中的-动态参数"><a href="#二、获取URL中的-动态参数" class="headerlink" title="二、获取URL中的 动态参数"></a>二、获取URL中的 动态参数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">app.get(<span class="string">&#x27;/user/:id&#x27;</span> , <span class="function">(<span class="params">req,res</span>) =&gt;</span>&#123;</span><br><span class="line">	<span class="comment">// 里面存放着通过 ： 动态 匹配到的参数值</span></span><br><span class="line">       <span class="built_in">console</span>.log(req.params)</span><br><span class="line">	         </span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="三、-express-static-托管静态资源"><a href="#三、-express-static-托管静态资源" class="headerlink" title="三、 express.static()  托管静态资源"></a>三、 express.static()  托管静态资源</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express  = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span>  app =express()</span><br><span class="line"></span><br><span class="line">app.use(express.static(<span class="string">&#x27;./clock&#x27;</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>,<span class="function">()=&gt;</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log( <span class="string">&#x27;服务器已在成功启动 http://localhost:3000&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="挂载路径前缀"><a href="#挂载路径前缀" class="headerlink" title="挂载路径前缀"></a>挂载路径前缀</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">app.use(<span class="string">&#x27;/public&#x27;</span>,express.static(<span class="string">&#x27;./clock&#x27;</span>) )</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h1 id="路由的使用"><a href="#路由的使用" class="headerlink" title="路由的使用"></a>路由的使用</h1><h2 id="express路由使用"><a href="#express路由使用" class="headerlink" title="express路由使用"></a>express路由使用</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> <span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"></span><br><span class="line"> app.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">   res.send(<span class="string">&#x27;hello get&#x27;</span>)</span><br><span class="line"> &#125;)</span><br><span class="line"></span><br><span class="line"> app.post(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">   res.send(<span class="string">&#x27;hello post&#x27;</span>)</span><br><span class="line"> &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">80</span>, <span class="function">()=&gt;</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;http://localhost:80&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="模块化路由"><a href="#模块化路由" class="headerlink" title="模块化路由"></a>模块化路由</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line">      <span class="keyword">const</span> app = express()</span><br><span class="line"></span><br><span class="line">       <span class="keyword">const</span> router =<span class="built_in">require</span>(<span class="string">&#x27;./04-router.js&#x27;</span>)</span><br><span class="line">       app.use(router)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      app.listen(<span class="number">80</span>, <span class="function">()=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;http://localhost:80&#x27;</span>);</span><br><span class="line">      &#125;)</span><br></pre></td></tr></table></figure>
-
-<p> <strong>路由模板</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"> <span class="keyword">const</span> router = express.Router()</span><br><span class="line"></span><br><span class="line"> router.get(<span class="string">&#x27;/user/list&#x27;</span>, <span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">   res.send(<span class="string">&#x27;Get user list&#x27;</span>)</span><br><span class="line"> &#125;)</span><br><span class="line"></span><br><span class="line"> router.post(<span class="string">&#x27;/user/add&#x27;</span>, <span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">   res.send(<span class="string">&#x27;Add new user&#x27;</span>)</span><br><span class="line"> &#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports=router</span><br></pre></td></tr></table></figure>
-
-<h2 id="为路由模块添加前缀"><a href="#为路由模块添加前缀" class="headerlink" title="为路由模块添加前缀"></a>为路由模块添加前缀</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span>  userRouter = <span class="built_in">require</span>(<span class="string">&#x27;./rouetr/user.js&#x27;</span>)</span><br><span class="line">      </span><br><span class="line">      app.usre(<span class="string">&#x27;/api&#x27;</span>, userRouter)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="express-中间件"><a href="#express-中间件" class="headerlink" title="express 中间件"></a>express 中间件</h1><h2 id="全局中间件"><a href="#全局中间件" class="headerlink" title="全局中间件"></a>全局中间件</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">app.use(<span class="function">(<span class="params">req,res,next</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;js是世界上最好de语音&#x27;</span>);</span><br><span class="line">    next()</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">&#x27;/&#x27;</span>,<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">  res.send(<span class="string">&#x27;home page&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">&#x27;/user&#x27;</span>,<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">  res.send(<span class="string">&#x27;user page&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="局部中间件"><a href="#局部中间件" class="headerlink" title="局部中间件"></a>局部中间件</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mw =<span class="function">(<span class="params">req,res,next</span>)=&gt;</span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">&#x27;js是世界上最美丽的语音&#x27;</span>);</span><br><span class="line">   next()</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">&#x27;/&#x27;</span>,mw,<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">  res.send(<span class="string">&#x27;home page&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="局部定义多个中间件"><a href="#局部定义多个中间件" class="headerlink" title="局部定义多个中间件"></a>局部定义多个中间件</h2><p>局部中间件 按照<strong>从前往后</strong>的 顺序执行 多个中间件</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">&#x27;/&#x27;</span>,[mw1,mw2],<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">       res.send(<span class="string">&#x27;home page&#x27;</span>)</span><br><span class="line">     &#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="中间件的5个注意事项"><a href="#中间件的5个注意事项" class="headerlink" title="中间件的5个注意事项"></a>中间件的5个注意事项</h2><ol>
-<li>一定要在<strong>路由之前</strong>注册中间件</li>
-<li>客户端发送过来的请求，<strong>可以连续调用多个</strong>中间件进行处理</li>
-<li>执行完中间件的业务代码之后，<strong>不要忘记调用next（）函数</strong></li>
-<li>为了<strong>防止代码逻辑混乱</strong>，调用next（）函数后不要再写额外的代码</li>
-<li>连续调用多个中间件时，多个中间件之间，<strong>共享req和res 对象</strong></li>
-</ol>
-<h2 id="中间件的分类"><a href="#中间件的分类" class="headerlink" title="中间件的分类"></a>中间件的分类</h2><h3 id="应用级别的中间件"><a href="#应用级别的中间件" class="headerlink" title="应用级别的中间件"></a><strong>应用级别</strong>的中间件</h3><p>​     <strong>通过 app.use()或app.get()，app.post() 绑定到 app 实例上的中间件  都叫应用级别的中间件</strong></p>
-<p><img src="express%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.assets/image-20210705182006904.png" alt="image-20210705182006904"></p>
-<h3 id="路由级别的中间件"><a href="#路由级别的中间件" class="headerlink" title="路由级别的中间件"></a><strong>路由级别</strong>的中间件</h3><p><img src="express%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.assets/image-20210705182315627.png" alt="image-20210705182315627"></p>
-<h3 id="错误级别的中间件"><a href="#错误级别的中间件" class="headerlink" title="错误级别的中间件"></a><strong>错误级别的</strong>中间件</h3><p> <strong>格式</strong>  ： 错误级别中间件的function 处理函数中 ，必须有<strong>有4个形参</strong>，顺序分别是（<strong>err</strong>,req,res,<strong>next</strong>）</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line">      <span class="keyword">const</span> app = express()</span><br><span class="line"></span><br><span class="line">        app.get(<span class="string">&#x27;/&#x27;</span>,<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;服务器内部发生了错误&#x27;</span>)</span><br><span class="line">          res.send(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        app.use(<span class="function">(<span class="params">err,req,res,next</span>)=&gt;</span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&#x27;发生了错误&#x27;</span> +err.messsage);</span><br><span class="line">          res.send(<span class="string">&#x27;Error&#x27;</span>+err.message)</span><br><span class="line">        &#125;)                      </span><br><span class="line"></span><br><span class="line">           app.listen(<span class="number">3000</span>, <span class="function">()=&gt;</span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&#x27;http://localhost:3000&#x27;</span>);</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Express内置的中间件"><a href="#Express内置的中间件" class="headerlink" title="Express内置的中间件"></a><strong>Express</strong>内置的中间件</h3><ol>
-<li> <strong>express.static</strong>  快速托管静态 资源的内置中间件  </li>
-<li> <strong>express.json</strong>  解析<strong>JSON</strong> 格式请求体 （4.16版本）</li>
-<li> <strong>express.urlencoded</strong> 解析URL-encoded 格式的请求体数据</li>
-<li><img src="express%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.assets/image-20210705220144268.png" alt="image-20210705220144268"></li>
-</ol>
-<p>application/json 数据格式       <strong>{“title”:”test”,”sub”:[1,2,3]}</strong> 的方式进行编码</p>
-<p>application/x-www-form-urlencoded  数据格式  **key1=val1&amp;key2=val2 **</p>
-<p>具体两者 关系前往  <a target="_blank" rel="noopener" href="https://www.cnblogs.com/UnfetteredMan/p/13854653.html">Express中间件</a></p>
-<h3 id="第三方中间件"><a href="#第三方中间件" class="headerlink" title="第三方中间件"></a><strong>第三方</strong>中间件</h3><ul>
-<li><p><strong>body-parser</strong> </p>
-<ul>
-<li>npm install body-parser</li>
-<li>require 导入中间件</li>
-<li>app.use()注册 使用中间件</li>
-</ul>
-<p>Express 内置的 <strong>express.urlencoded</strong> 中间件 基于 body-parser 第三方中间件 进一步封装出来的</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line">      <span class="keyword">const</span> parser = <span class="built_in">require</span>(<span class="string">&#x27;body-parser&#x27;</span>)</span><br><span class="line">      <span class="keyword">const</span> app = express()</span><br><span class="line">        app.use(parser.urlencoded(&#123;<span class="attr">extended</span>:<span class="literal">false</span>&#125;))      </span><br><span class="line">  </span><br><span class="line">        app.post(<span class="string">&#x27;/user&#x27;</span>,<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">          res.send(<span class="string">&#x27;hello my friend&#x27;</span>)</span><br><span class="line">          <span class="built_in">console</span>.log(req.body);</span><br><span class="line">          &#125;)</span><br><span class="line">  </span><br><span class="line">          app.listen(<span class="number">3000</span>, <span class="function">()=&gt;</span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&#x27;http://localhost:3000&#x27;</span>);</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="自定义中间件"><a href="#自定义中间件" class="headerlink" title="自定义中间件"></a>自定义中间件</h3><ul>
-<li>​    手动模拟一个 express.urlencoded  解析 POST 提交到服务器表单<ul>
-<li>定义中间件</li>
-<li>监听req 的data 事件</li>
-<li>使用 querystring 模块 解析请求体 数据</li>
-<li>讲解析出来的数据 对象 挂载为 res.body</li>
-<li>讲自定义中间件封装为模块</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line">      <span class="keyword">const</span> app = express()</span><br><span class="line">      <span class="keyword">const</span> qs =<span class="built_in">require</span>(<span class="string">&#x27;querystring&#x27;</span>)        </span><br><span class="line">      <span class="comment">//调用 querystring.parse()  可将字符串转换成 对象的形式                              </span></span><br><span class="line"><span class="comment">// json.stringgify()       可将JSON对象 转换成  字符串形式</span></span><br><span class="line">      app.use(<span class="function">(<span class="params">req,res,next</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> str=<span class="string">&#x27;&#x27;</span></span><br><span class="line">        req.on(<span class="string">&#x27;data&#x27;</span>,<span class="function">(<span class="params">chunk</span>)=&gt;</span>&#123;		<span class="comment">//监听data 事件 将每次传输的数据 拼接</span></span><br><span class="line">          str += chunk</span><br><span class="line"></span><br><span class="line">        &#125;)</span><br><span class="line">        req.on(<span class="string">&#x27;end&#x27;</span>,<span class="function">()=&gt;</span>&#123;</span><br><span class="line">         <span class="keyword">const</span> body=qs.parse(str)			</span><br><span class="line">          req.body=body</span><br><span class="line">         next()</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">      &#125;)</span><br><span class="line">      app.post(<span class="string">&#x27;/user&#x27;</span>, <span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">        res.send(req.body)</span><br><span class="line"></span><br><span class="line">      &#125;)</span><br><span class="line"></span><br><span class="line">          app.listen(<span class="number">3000</span>, <span class="function">()=&gt;</span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&#x27;http://localhost:3000&#x27;</span>);</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="自定义中间件的封装"><a href="#自定义中间件的封装" class="headerlink" title="自定义中间件的封装"></a>自定义中间件的封装</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line">      <span class="keyword">const</span> custombodyparser = <span class="built_in">require</span>(<span class="string">&#x27;./11.custombodyparser&#x27;</span>)   </span><br><span class="line">      <span class="comment">//调用封装的函数 对数据进行格式</span></span><br><span class="line">      <span class="keyword">const</span> app = express()                              </span><br><span class="line"></span><br><span class="line">      app.use(custombodyparser)</span><br><span class="line">      app.post(<span class="string">&#x27;/user&#x27;</span>, <span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">        res.send(req.body)</span><br><span class="line">      &#125;)</span><br><span class="line"></span><br><span class="line">          app.listen(<span class="number">3000</span>, <span class="function">()=&gt;</span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&#x27;http://localhost:3000&#x27;</span>);</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> qs =<span class="built_in">require</span>(<span class="string">&#x27;querystring&#x27;</span>)   </span><br><span class="line">       <span class="keyword">const</span> custombodyparser= <span class="function">(<span class="params">req,res,next</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> str=<span class="string">&#x27;&#x27;</span></span><br><span class="line">        req.on(<span class="string">&#x27;data&#x27;</span>,<span class="function">(<span class="params">chunk</span>)=&gt;</span>&#123;</span><br><span class="line">          str += chunk</span><br><span class="line"></span><br><span class="line">        &#125;)</span><br><span class="line">        req.on(<span class="string">&#x27;end&#x27;</span>,<span class="function">()=&gt;</span>&#123;</span><br><span class="line">         <span class="keyword">const</span> body=qs.parse(str)</span><br><span class="line">          req.body=body</span><br><span class="line">         next()</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">module</span>.exports= custombodyparser</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h1 id="使用Express-写接口"><a href="#使用Express-写接口" class="headerlink" title="使用Express 写接口"></a>使用Express 写接口</h1><ol>
-<li><p>创建基本的服务器</p>
-</li>
-<li><p>创建API路由模块</p>
-</li>
-<li><p>编写get 接口</p>
-</li>
-<li><p>编写 post 接口</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express =<span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router =express.Router()</span><br><span class="line">   </span><br><span class="line">router.get(<span class="string">&#x27;/get&#x27;</span>,<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line"> <span class="keyword">let</span> query= req.query</span><br><span class="line">  res.send(&#123;</span><br><span class="line">    <span class="attr">status</span>:<span class="number">0</span>,</span><br><span class="line">    <span class="attr">msg</span>:<span class="string">&#x27;get请求成功&#x27;</span>,</span><br><span class="line">    <span class="attr">data</span>:query</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">   </span><br><span class="line">router.post(<span class="string">&#x27;/post&#x27;</span>,<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> body =req.body</span><br><span class="line">  res.send(&#123;</span><br><span class="line">    <span class="attr">status</span>:<span class="number">0</span>,</span><br><span class="line">    <span class="attr">msg</span>:<span class="string">&#x27;post请求成功&#x27;</span>,</span><br><span class="line">    <span class="attr">data</span>:body</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line"><span class="built_in">module</span>.exports= router</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h1 id="cors接口跨域问题"><a href="#cors接口跨域问题" class="headerlink" title="cors接口跨域问题"></a>cors接口跨域问题</h1><h2 id="接口的跨域问题"><a href="#接口的跨域问题" class="headerlink" title="接口的跨域问题"></a>接口的跨域问题</h2><ol>
-<li> CORS (主流解决方案，推荐使用)</li>
-<li>JSONP (有缺陷 ，只支持GET 请求)</li>
-</ol>
-<h2 id="使用CORS-中间件-解决跨域"><a href="#使用CORS-中间件-解决跨域" class="headerlink" title="使用CORS 中间件 解决跨域"></a>使用CORS 中间件 解决跨域</h2><p> <strong>cors</strong> 是<strong>Express</strong> 的第三方中间件 通过安装 配置 cors 中间件 解决跨域问题</p>
-<ol>
-<li><strong>npm i  cors</strong></li>
-<li><strong>const cors =require(‘cors’)</strong></li>
-<li><strong>在路由之前 调用  app.use(cors())</strong> </li>
-</ol>
-<h2 id="cors中的注意事项-1"><a href="#cors中的注意事项-1" class="headerlink" title="cors中的注意事项(1)"></a>cors中的注意事项(1)</h2><ol>
-<li>在路由之前 调用 app.use <strong>(cors()</strong>)    // <strong>cors()</strong></li>
-</ol>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.staticfile.org/jquery/1.10.0/jquery.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btnGET&quot;</span>&gt;</span>GET<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btnPOST&quot;</span>&gt;</span>POSt<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">  <span class="comment">//get </span></span></span><br><span class="line"><span class="javascript"> $(<span class="string">&#x27;#btnGET&#x27;</span>).on(<span class="string">&#x27;click&#x27;</span>,<span class="function">()=&gt;</span>&#123;</span></span><br><span class="line"><span class="javascript">  $.ajax(&#123;</span></span><br><span class="line"><span class="javascript">    <span class="attr">type</span>:<span class="string">&#x27;GET&#x27;</span>,</span></span><br><span class="line"><span class="javascript">    <span class="attr">url</span>:<span class="string">&#x27;http://localhost:3000/api/get&#x27;</span>,</span></span><br><span class="line"><span class="javascript">    <span class="attr">data</span>:&#123;</span></span><br><span class="line"><span class="javascript">      <span class="attr">name</span>:<span class="string">&#x27;zt&#x27;</span>,</span></span><br><span class="line"><span class="javascript">      <span class="attr">age</span>:<span class="number">20</span>,</span></span><br><span class="line"><span class="javascript">      <span class="attr">gender</span>:<span class="string">&#x27;男&#x27;</span></span></span><br><span class="line"><span class="javascript">    &#125;,</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="title">success</span>(<span class="params">res</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(res);</span></span><br><span class="line"><span class="javascript">    &#125;   </span></span><br><span class="line"><span class="javascript">  &#125;)</span></span><br><span class="line"><span class="javascript"> &#125;)</span></span><br><span class="line"><span class="javascript"> <span class="comment">//post </span></span></span><br><span class="line"><span class="javascript"></span></span><br><span class="line"><span class="javascript"> $(<span class="string">&#x27;#btnPOST&#x27;</span>).on(<span class="string">&#x27;click&#x27;</span>,<span class="function">()=&gt;</span>&#123;</span></span><br><span class="line"><span class="javascript">  $.ajax(&#123;</span></span><br><span class="line"><span class="javascript">    <span class="attr">type</span>:<span class="string">&#x27;POST&#x27;</span>,</span></span><br><span class="line"><span class="javascript">    <span class="attr">url</span>:<span class="string">&#x27;http://localhost:3000/api/post&#x27;</span>,</span></span><br><span class="line"><span class="javascript">    <span class="attr">data</span>:&#123;</span></span><br><span class="line"><span class="javascript">      <span class="attr">bookname</span>:<span class="string">&#x27;水浒传&#x27;</span>,</span></span><br><span class="line"><span class="javascript">      <span class="attr">autoname</span>:<span class="string">&#x27;施耐庵&#x27;</span></span></span><br><span class="line"><span class="javascript">    &#125;,</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="title">success</span>(<span class="params">res</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(res);</span></span><br><span class="line"><span class="javascript">    &#125;   </span></span><br><span class="line"><span class="javascript">  &#125;)</span></span><br><span class="line"><span class="javascript"> &#125;)</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"><span class="keyword">const</span> cors = <span class="built_in">require</span>(<span class="string">&#x27;cors&#x27;</span>)</span><br><span class="line">app.use(cors())</span><br><span class="line"></span><br><span class="line">app.use(express.urlencoded(&#123;<span class="attr">extended</span>:<span class="literal">false</span>&#125;)) </span><br><span class="line"><span class="keyword">const</span> apiRouter = <span class="built_in">require</span>(<span class="string">&#x27;./13router&#x27;</span>)</span><br><span class="line">app.use(<span class="string">&#x27;/api&#x27;</span>,apiRouter)</span><br><span class="line"></span><br><span class="line">                                         </span><br><span class="line">                                                                       </span><br><span class="line"> app.listen(<span class="number">3000</span>, <span class="function">()=&gt;</span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">&#x27;http://localhost:3000&#x27;</span>);</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express =<span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router =express.Router()</span><br><span class="line"></span><br><span class="line">router.get(<span class="string">&#x27;/get&#x27;</span>,<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line"> <span class="keyword">const</span> query=req.query</span><br><span class="line">  res.send(&#123;</span><br><span class="line">    <span class="attr">status</span>:<span class="number">0</span>,</span><br><span class="line">    <span class="attr">msg</span>:<span class="string">&#x27;get请求成功&#x27;</span>,</span><br><span class="line">    <span class="attr">data</span>:query</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">router.post(<span class="string">&#x27;/post&#x27;</span>,<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> body =req.body</span><br><span class="line">  res.send(&#123;</span><br><span class="line">    <span class="attr">status</span>:<span class="number">0</span>,</span><br><span class="line">    <span class="attr">msg</span>:<span class="string">&#x27;post请求成功&#x27;</span>,</span><br><span class="line">    <span class="attr">data</span>:body</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports= router</span><br></pre></td></tr></table></figure>
-
-<h2 id="cors中的注意事项-2"><a href="#cors中的注意事项-2" class="headerlink" title="cors中的注意事项(2)"></a>cors中的注意事项(2)</h2><ol>
-<li>CORS 主要在<strong>服务器端</strong>进行配置，客户端<strong>无须做任何额外配置</strong>，即可请求开启CORS的接口</li>
-<li>CORS 在浏览器中有兼容性</li>
-</ol>
-<h2 id="CORS-响应头-Access-Control-Allow-Origin"><a href="#CORS-响应头-Access-Control-Allow-Origin" class="headerlink" title="CORS 响应头 Access-Control-Allow-Origin"></a>CORS 响应头 Access-Control-Allow-Origin</h2><p>​     **Access-Control-Allow-Origin:<origin> | ***</p>
-<p>eg:   <strong>res.setHeader(‘Access-Control-Allow-Origin’,’<a target="_blank" rel="noopener" href="http://itcast.cn&/#39;">http://itcast.cn&#39;</a>)</strong>     //只允许来自 itcast.cn 的请求</p>
-<p>​        <strong>res.setHeader(‘Access-Control-Allow-Origin’, ‘ * ’)</strong>                                //允许<strong>任何域</strong> 发起请求  </p>
-<h1 id="回顾jSOP"><a href="#回顾jSOP" class="headerlink" title="回顾jSOP"></a>回顾jSOP</h1><p> 概念 浏览器 通过script 标签的src 属性 请求服务器上的数据  同时 <strong>服务器返回一个函数的调用</strong></p>
-<pre><code>      这种请求数据的方式 叫做JSONP
-</code></pre>
-<p>特点：</p>
-<ol>
-<li> JSONP 不属于AJAX 请求 因为他没有使用 XMLHTTPRequest 这个对象</li>
-<li>JSONP 仅支持 GET 请求 不支持 POST ，DELETE 等请求</li>
-</ol>
-<h2 id="创建JSONP-接口注意事项"><a href="#创建JSONP-接口注意事项" class="headerlink" title="创建JSONP 接口注意事项"></a>创建JSONP 接口注意事项</h2><p>如果项目中 <strong>已配置CORS</strong>跨域资源共享，为了<strong>防止冲突</strong>，<strong>必须在配置CORS中间件之前</strong> 声明JSONP接口，否则</p>
-<p><strong>JSONP</strong>接口会被处理成开启CORS 的接口</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">&#x27;/api/jsonp&#x27;</span>,<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;&#125;)</span><br><span class="line">app.use(cors())</span><br><span class="line">app.get(<span class="string">&#x27;/api/get&#x27;</span>,<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="在网页中使用jquery-发起jsonp-请求"><a href="#在网页中使用jquery-发起jsonp-请求" class="headerlink" title="在网页中使用jquery 发起jsonp 请求"></a>在网页中使用jquery 发起jsonp 请求</h2><p> 调用$.ajax()函数 ，<strong>提供JSONP 的配置选择</strong> 从而发起JSONP请求</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;#btnJSONP&#x27;</span>).on(<span class="string">&#x27;click&#x27;</span>,<span class="function">()=&gt;</span>&#123;</span><br><span class="line">          $.ajax(&#123;</span><br><span class="line">              <span class="attr">method</span>:<span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">              <span class="attr">url</span>:<span class="string">&#x27;http://localhost:3000/api/jsonp&#x27;</span>,</span><br><span class="line">              <span class="attr">dataType</span>:<span class="string">&#x27;jsonp&#x27;</span>,			<span class="comment">//很关键</span></span><br><span class="line">              <span class="function"><span class="title">success</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                  <span class="built_in">console</span>.log(res)</span><br><span class="line">              &#125;                                          </span><br><span class="line">          &#125;)                     </span><br><span class="line">      &#125;)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">&#x27;/api/jsonp&#x27;</span>,<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">          <span class="keyword">const</span> funcName =req.query.callback</span><br><span class="line">          <span class="keyword">const</span> data = &#123;  <span class="attr">name</span> : <span class="string">&#x27;zs&#x27;</span> ,  <span class="attr">age</span>: <span class="number">22</span> &#125;</span><br><span class="line">          </span><br><span class="line">          <span class="keyword">const</span> scriptStr = <span class="string">`<span class="subst">$&#123;funcName&#125;</span>(<span class="subst">$&#123;<span class="built_in">JSON</span>.stringify(data)&#125;</span>)`</span>  <span class="comment">//返回来调用 cb(data)</span></span><br><span class="line">          res.send(scriptStr)</span><br><span class="line">      &#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/11/16/express%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-CSS七种居中" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="transform-居中"><a href="#transform-居中" class="headerlink" title="==transform 居中=="></a>==transform 居中==</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> .wrap&#123;           <span class="comment">//父</span></span><br><span class="line">  <span class="attr">position</span>: relative;</span><br><span class="line">  border: 1px solid red;</span><br><span class="line">  width: 300px;</span><br><span class="line">  height: 300px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.child &#123;			<span class="comment">//子</span></span><br><span class="line">  <span class="attr">position</span>: absolute;</span><br><span class="line">  width: 100px;</span><br><span class="line">  height: 100px;</span><br><span class="line">  background-color: green;</span><br><span class="line">  top: <span class="number">50</span>%;</span><br><span class="line">  left: <span class="number">50</span>%;</span><br><span class="line">  transform: translate(-<span class="number">50</span>%,-<span class="number">50</span>%);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="absolute-margin-auto"><a href="#absolute-margin-auto" class="headerlink" title="absolute +margin auto"></a>absolute +margin auto</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">		</span><br><span class="line">		</span><br><span class="line">.child &#123;</span><br><span class="line">    <span class="attr">position</span>: absolute;;</span><br><span class="line">    top: <span class="number">0</span>;</span><br><span class="line">    left: <span class="number">0</span>;</span><br><span class="line">    right: <span class="number">0</span>;</span><br><span class="line">    bottom: <span class="number">0</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="absolute-calc"><a href="#absolute-calc" class="headerlink" title="absolute + calc"></a>absolute + calc</h1><blockquote>
-<p>这种方式也要求居中元素的宽高必须固定</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">.wp &#123;</span><br><span class="line">    <span class="attr">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line">.box &#123;</span><br><span class="line">    <span class="attr">position</span>: absolute;;</span><br><span class="line">    top: calc(<span class="number">50</span>% - 50px);  <span class="comment">// 50% 为top百分值             50px为 子级 一半 宽都    </span></span><br><span class="line">    left: calc(<span class="number">50</span>% - 50px);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="absolte-负margin"><a href="#absolte-负margin" class="headerlink" title="absolte + 负margin"></a>absolte + 负margin</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> </span><br><span class="line"><span class="comment">/* 定位代码 */</span></span><br><span class="line">.father &#123;</span><br><span class="line">    <span class="attr">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line">.son &#123;</span><br><span class="line">    <span class="attr">position</span>: absolute;;</span><br><span class="line">    top: <span class="number">50</span>%;</span><br><span class="line">    left: <span class="number">50</span>%;</span><br><span class="line">    margin-left: -50px;</span><br><span class="line">    margin-top: -50px;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br></pre></td></tr></table></figure>
-
-
-
-<p>5  lineheigth</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">.father &#123;</span><br><span class="line">    line-height: 300px;</span><br><span class="line">    text-align: center;</span><br><span class="line">    font-size: 0px;</span><br><span class="line">&#125;</span><br><span class="line">.son &#123;</span><br><span class="line">    font-size: 16px;</span><br><span class="line">    display: inline-block;</span><br><span class="line">    vertical-align: middle;</span><br><span class="line">    line-height: initial;</span><br><span class="line">    text-align: left; <span class="comment">/* 修正文字 */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/11/16/CSS%E4%B8%83%E7%A7%8D%E5%B1%85%E4%B8%AD/">展开全文 >></a>
     </p>
     
 
